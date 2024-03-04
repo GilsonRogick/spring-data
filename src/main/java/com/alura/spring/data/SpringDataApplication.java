@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class SpringDataApplication implements CommandLineRunner {
 
     private final CrudCargoService cargoService;
+
     private Boolean system = true;
 
     public SpringDataApplication(CrudCargoService cargoService) {
@@ -19,10 +20,6 @@ public class SpringDataApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringDataApplication.class, args);
-    }
-
-    public void exibirOpcoesIniciais() {
-        system = true;
     }
 
     @Override
@@ -34,40 +31,7 @@ public class SpringDataApplication implements CommandLineRunner {
             System.out.println("0 - Sair");
             System.out.println("1 - Cargo");
 
-            if (scanner.hasNextInt()) {
-                int exibirOpcoes = scanner.nextInt();
-
-                switch (exibirOpcoes) {
-                    case 1:
-                        System.out.println("0 - Sair");
-                        System.out.println("1 - Cadastrar cargo");
-                        System.out.println("2 - Atualizar cargo");
-
-                        int exibirOpcoesCargo = scanner.nextInt(); // Adiciona menu para atualizar o cargo
-
-                        switch (exibirOpcoesCargo) {
-                            case 1:
-                                cargoService.inicial(scanner);
-                                break;
-                            case 2:
-                                System.out.println("Digite o ID do cargo que deseja atualizar:");
-                                int cargoId = scanner.nextInt();
-                                cargoService.atualizar(cargoId, scanner);
-                                break;
-                        }
-                    case 0:
-                        System.out.println("Saindo do sistema. Até logo!");
-                        system = false;
-                        break;
-                    default:
-                        System.out.println("Ação inválida. Tente novamente.");
-                }
-            } else {
-                System.out.println("Por favor, insira um valor inteiro válido.");
-                scanner.next(); // Limpa o buffer do Scanner
-            }
-
-            int action = scanner.nextInt(); //pega o valor inteiroq ue o cliente digita no console
+            int action = scanner.nextInt(); //pega o valor inteiro que o cliente digita no console
             if (action == 1) {
                 cargoService.inicial(scanner);
             } else {
